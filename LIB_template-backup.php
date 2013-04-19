@@ -32,23 +32,22 @@ END;
 //getting the current weather in Rochester
 function weather(){
 //the place can be changed in the url
-$url = "http://www.weather.com/weather/today/Rochester+NY+USNY1232:1:US";
+$url = "http://www.weather.com/weather/today/USNY1232";
 $info = file_get_contents($url);
-$img = return_between($info, '<div class="wx-data-part wx-first">', '</div>', EXCL);
-$image = return_between($img, '<img src="', '"', EXCL);
-$des = return_between($info, '<div class="wx-data-part wx-first">', '="wx-weather-icon">', EXCL);
-$desc = return_between($des, 'alt="', '" class', EXCL);
-$temp = return_between($info, '<div class="wx-temperature"><span itemprop="temperature-fahrenheit">', '</span><span class="wx-degrees">&deg;<span class="wx-unit">F</span></span></div>', EXCL);
+$image = return_between($info, '2"><img src="', '" alt="', EXCL);
+$des = return_between($info, '2"><img src="', ' w', EXCL);
+$desc = return_between($des, 'alt="', '"', EXCL);
+$temp = return_between($info, '1 twc-forecast-temperature"><strong>', '"', EXCL);
 $weather = <<<END
 <table>
 	<tr>
 		<td>
 			<img src = "$image" width = "90px" height = "90px" />
-			<span style = "font-size: 42px; color:#999999;">$temp &deg; F</span>
+			<span style = "font-size: 42px; color:#999999;">$temp</span>
 		</td>
 	</tr>
 	<tr>
-		<td align = "right">
+		<td colspan="2">
 			<span style = "color:#999999;">$desc</span>
 		</td>
 	</tr>
@@ -109,21 +108,112 @@ $editorials = <<<END
 END;
 return $editorials;
 }
-//takes in content in file as array and returns the title for each article
-function titlenews($cat = "none", $txt = "file.txt"){
-	if(file_exists($txt) && is_readable($txt)){
-		$data = file($txt);
-		foreach($data as $line){
+//ritnews, takes in content in file as array and returns the title for each article
+function ritnews($rit = "rit.txt"){
+	if(file_exists($rit) && is_readable($rit)){
+		$ritdata = file($rit);
+		foreach($ritdata as $line){
 			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
-			$index[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-			echo '<li><a href = "/jxz6853/539/project2/news.php/#'.$cat.'">'.$title.'</a></li>';
+			$ritindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			echo '<li><a href = "/jxz6853/539/project2/news.php/#rit">'.$title.'</a></li>';
 		}
 	}else
 		//if file doesn't exist/not readable
-		echo "<strong>No news available for the ".$cat.".</strong>";
+		echo "<strong>No news available for the rit.</strong>";
+}
+//nationnews, takes in content in file as array and returns the title for each article
+function nationnews($nation = "nation.txt"){
+	if(file_exists($nation) && is_readable($nation)){
+		$nationdata = file($nation);
+		foreach($nationdata as $line){
+			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
+			$nationindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			echo '<li><a href = "/jxz6853/539/project2/news.php/#nation">'.$title.'</a></li>';
+		}
+	}else
+		//if file doesn't exist/not readable
+		echo "<strong>No news available for the nation.</strong>";
+}
+//worldnews, takes in content in file as array and returns the title for each article
+function worldnews($world = "world.txt"){
+	if(file_exists($world) && is_readable($world)){
+		$worlddata = file($world);
+		foreach($worlddata as $line){
+			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
+			$worldindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			echo '<li><a href = "/jxz6853/539/project2/news.php/#world">'.$title.'</a></li>';
+		}
+	}else
+		//if file doesn't exist/not readable
+		echo "<strong>No news available for the world.</strong>";
+}
+//businessnews, takes in content in file as array and returns the title for each article
+function businessnews($business = "business.txt"){
+	if(file_exists($business) && is_readable($business)){
+		$businessdata = file($business);
+		foreach($businessdata as $line){
+			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
+			$businessindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			echo '<li><a href = "/jxz6853/539/project2/news.php/#business">'.$title.'</a></li>';
+		}
+	}else
+		//if file doesn't exist/not readable
+		echo "<strong>No news available for the business.</strong>";
+}
+//technologynews, takes in content in file as array and returns the title for each article
+function technologynews($technology = "technology.txt"){
+	if(file_exists($technology) && is_readable($technology)){
+		$technologydata = file($technology);
+		foreach($technologydata as $line){
+			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
+			$technologyindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			echo '<li><a href = "/jxz6853/539/project2/news.php/#technology">'.$title.'</a></li>';
+		}
+	}else
+		//if file doesn't exist/not readable
+		echo "<strong>No news available for the technology.</strong>";
+}
+//entertainmentnews, takes in content in file as array and returns the title for each article
+function entertainmentnews($entertainment = "entertainment.txt"){
+	if(file_exists($entertainment) && is_readable($entertainment)){
+		$entertainmentdata = file($entertainment);
+		foreach($entertainmentdata as $line){
+			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
+			$entertainmentindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			echo '<li><a href = "/jxz6853/539/project2/news.php/#entertainment">'.$title.'</a></li>';
+		}
+	}else
+		//if file doesn't exist/not readable
+		echo "<strong>No news available for the entertainment.</strong>";
+}
+//sportsnews, takes in content in file as array and returns the title for each article
+function sportsnews($sports = "sports.txt"){
+	if(file_exists($sports) && is_readable($sports)){
+		$sportsdata = file($sports);
+		foreach($sportsdata as $line){
+			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
+			$sportsindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			echo '<li><a href = "/jxz6853/539/project2/news.php/#sports">'.$title.'</a></li>';
+		}
+	}else
+		//if file doesn't exist/not readable
+		echo "<strong>No news available for the sports.</strong>";
+}
+//miscellaneousnews, takes in content in file as array and returns the title for each article
+function miscellaneousnews($miscellaneous = "misc.txt"){
+	if(file_exists($miscellaneous) && is_readable($miscellaneous)){
+		$miscellaneousdata = file($miscellaneous);
+		foreach($miscellaneousdata as $line){
+			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
+			$miscellaneousindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			echo '<li><a href = "/jxz6853/539/project2/news.php/#misc">'.$title.'</a></li>';
+		}
+	}else
+		//if file doesn't exist/not readable
+		echo "<strong>No news available for the miscellaneous.</strong>";
 }
 //news, the homepage with all of the news sections and titles
-function news($rit = "rit", $rittxt = "rit.txt", $nation = "nation", $nationtxt = "nation.txt", $world = "world", $worldtxt = "world.txt", $business = "business", $businesstxt = "business.txt", $technology = "technology", $technologytxt = "technology.txt", $entertainment = "entertainment", $entertainmenttxt = "entertainment.txt", $sports = "sports", $sportstxt = "sports.txt", $miscellaneous = "miscellaneous", $misctxt = "misc.txt"){
+function news($rit = "rit.txt", $nation = "nation.txt", $world = "world.txt", $business = "business.txt", $technology = "technology.txt", $entertainment = "entertainment.txt", $sports = "sports.txt", $miscellaneous = "misc.txt"){
 echo '
 <table width = "888px" border="1" style = "font-size: 12px";>
 	<tr>
@@ -136,10 +226,10 @@ echo '
 	</tr>
 	<tr>
 		<td height = "200px" width = "50%">';
-titlenews($rit, $rittxt);
+ritnews($rit = "rit.txt");
 echo '</td>
 		<td height = "200px">';
-titlenews($nation, $nationtxt);
+nationnews($nation = "nation.txt");
 echo '</td>
 	</tr>
 	<tr>
@@ -152,10 +242,10 @@ echo '</td>
 	</tr>
 	<tr>
 		<td height = "200px">';
-titlenews($world, $worldtxt);
+worldnews($world = "world.txt");
 echo '</td>
 		<td height = "200px">';
-titlenews($business, $businesstxt);
+businessnews($business = "business.txt");
 echo '</td>
 	</tr>
 	<tr>
@@ -168,10 +258,10 @@ echo '</td>
 	</tr>
 	<tr>
 		<td height = "200px">';
-titlenews($technology, $technologytxt);
+technologynews($technology = "technology.txt");
 echo '</td>
 		<td height = "200px">';
-titlenews($entertainment, $entertainmenttxt);
+entertainmentnews($entertainment = "entertainment.txt");
 echo '</td>
 	</tr>
 	<tr>
@@ -184,10 +274,10 @@ echo '</td>
 	</tr>
 	<tr>
 		<td height = "200px">';
-titlenews($sports, $sportstxt);
+sportsnews($sports = "sports.txt");
 echo '</td>
 		<td height = "200px">';
-titlenews($miscellaneous, $misctxt);
+miscellaneousnews($miscellaneous = "misc.txt");
 echo '</td>
 	</tr>
 </table>';
@@ -309,8 +399,7 @@ $ritdata = file($rit);
 foreach($ritdata as $line){
 	list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
 	$ritindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-	//permalinks to show just one article at a time
-	echo '<tr><td><a href = "/jxz6853/539/project2/news/rit.php/?page='.$url.'&max=1">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
+	echo '<tr><td><a href = "/jxz6853/539/project2/news/rit.php/#'.$url.'">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
 	echo '<tr><td><i>'.$articleA.'...</i></td></tr>';
 	}
 }else	
@@ -321,7 +410,7 @@ $nationdata = file($nation);
 foreach($nationdata as $line){
 	list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
 	$nationindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-	echo '<tr><td><a href = "/jxz6853/539/project2/news/nation.php/?page='.$url.'&max=1">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
+	echo '<tr><td><a href = "/jxz6853/539/project2/news/nation.php/#'.$url.'">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
 	echo '<tr><td><i>'.$articleA.'...</i></td></tr>';
 	}
 }else	
@@ -332,7 +421,7 @@ $worlddata = file($world);
 foreach($worlddata as $line){
 	list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
 	$worldindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-	echo '<tr><td><a href = "/jxz6853/539/project2/news/world.php/?page='.$url.'&max=1">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
+	echo '<tr><td><a href = "/jxz6853/539/project2/news/world.php/#'.$url.'">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
 	echo '<tr><td><i>'.$articleA.'...</i></td></tr>';
 	}
 }else	
@@ -343,7 +432,7 @@ $businessdata = file($business);
 foreach($businessdata as $line){
 	list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
 	$businessindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-	echo '<tr><td><a href = "/jxz6853/539/project2/news/business.php/?page='.$url.'&max=1">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
+	echo '<tr><td><a href = "/jxz6853/539/project2/news/business.php/#'.$url.'">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
 	echo '<tr><td><i>'.$articleA.'...</i></td></tr>';
 	}
 }else	
@@ -354,7 +443,7 @@ $technologydata = file($technology);
 foreach($technologydata as $line){
 	list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
 	$technologyindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-	echo '<tr><td><a href = "/jxz6853/539/project2/news/technology.php/?page='.$url.'&max=1">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
+	echo '<tr><td><a href = "/jxz6853/539/project2/news/technology.php/#'.$url.'">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
 	echo '<tr><td><i>'.$articleA.'...</i></td></tr>';
 	}
 }else
@@ -365,7 +454,7 @@ $entertainmentdata = file($entertainment);
 foreach($entertainmentdata as $line){
 	list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
 	$entertainmentindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-	echo '<tr><td><a href = "/jxz6853/539/project2/news/entertainment.php/?page='.$url.'&max=1">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
+	echo '<tr><td><a href = "/jxz6853/539/project2/news/entertainment.php/#'.$url.'">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
 	echo '<tr><td><i>'.$articleA.'...</i></td></tr>';
 	}
 }else	
@@ -376,7 +465,7 @@ $sportsdata = file($sports);
 foreach($sportsdata as $line){
 	list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
 	$sportsindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-	echo '<tr><td><a href = "/jxz6853/539/project2/news/sports.php/?page='.$url.'&max=1">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
+	echo '<tr><td><a href = "/jxz6853/539/project2/news/sports.php/#'.$url.'">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
 	echo '<tr><td><i>'.$articleA.'...</i></td></tr>';
 	}
 }else	
@@ -387,7 +476,7 @@ $miscellaneousdata = file($miscellaneous);
 foreach($miscellaneousdata as $line){
 	list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
 	$miscellaneousindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-	echo '<tr><td><a href = "/jxz6853/539/project2/news/miscellaneous.php/?page='.$url.'&max=1">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
+	echo '<tr><td><a href = "/jxz6853/539/project2/news/miscellaneous.php/#'.$url.'">'.$title.' <i>By '.$author.'</i></a></td><td rowspan = "2" width = "10%">'.$date.'</td></tr>';
 	echo '<tr><td><i>'.$articleA.'...</i></td></tr>';
 	}
 echo newslinks();
@@ -397,110 +486,39 @@ echo newslinks();
 }
 echo '</table>';
 }
-//max per page
-function maxpp(){
-$max = <<<END
-<table style = "font-size: 12px" width = "888px">
-	<tr>
-		<td><div style = "margin-left:750px">
-		<form name = "selmax" method = "GET">
-			<br />Posts per page:
-			<select name = "max" onchange = "selmax.submit();">
-				<option value = ""></option>
-				<option value = "1">1</option>
-				<option value = "3">3</option>
-				<option value = "5">5</option>
-				<option value = "10">10</option>
-				<option value = "20">20</option>
-			</select>
-		</form>
-		</td>
-	</tr>
-</table>
-</div>
-END;
-echo $max;
-}
-//pagination, reading the actual articles with option to choose how many per page
-//tells user to go back when there are no more results
-function readnews($category = "none", $filen = "file.txt"){
-	if(!isset($_GET['page']) && !isset($_GET['max']))
-		@header("Location: /jxz6853/539/project2/news/".$category.".php?page=1&max=5");
-	if(!isset($_GET['page']))
-		@$_GET['page'] = 1;
-	if(file_exists($filen) && is_readable($filen)){
-		echo newslinks();
-		echo maxpp();
-		$filedata = file($filen);
+//sep groups
+function readritt($rit = "rit.txt")
+{
+	if(file_exists($rit) && is_readable($rit))
+	{
+		$ritdata = file($rit);
 		$articles = array();
-		foreach($filedata as $line){
+		foreach($ritdata as $line)
+		{
 			list($title, $url, $date, $author, $articleA, $articleB) = explode("|",$line);
-			$fileindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
-			$article = '<table style = "font-size:12px" width = "888px">';
-			$article .= '<tr><th colspan = "2">';
-			$article .= '<a href = "/jxz6853/539/project2/news/rit.php/?page='.$url.'&max=1">';
-			$article .= $title.'</u></a></th></tr>';
+			$ritindex[] = array('title' => $title,'url' => $url, 'date' => $date, 'author' => $author, 'articleA' => $articleA, 'articleB' => $articleB);
+			$article  = '<table style = "font-size:12px" width = "888px"><tr><th colspan = "2"><a href = "/jxz6853/539/project2/news.php?rit='.$url.'">'.$title.'</a></th></tr>';
 			$article .= '<tr><td width = "50%">Published: '.$date.'</td><td width = "50%">Written by: '.$author.'</td></tr><tr><td colspan = "2">'.$articleA.$articleB.'</td></tr>';
-			$article .= '<tr><td colspan = "2" align = "right"><b><i><a href = "/jxz6853/539/project2/comments.php">View Comments</a></i></b></table>';
-			$articles[] .= $article;
+			$article .= '<tr><td colspan = "2" align = "right"><b><i><a href = "/jxz6853/539/project2/comments.php'.$url.'">View Comments</a></i></b></table>';
+			$articles[] = $article;
+			unset($article);
 		}
-		if(isset($_POST["max"]))
-			$numposts = @$_POST["max"];
-		else
-			$numposts = @$_GET["max"];
-		$lines = count($line);
-		@$numpages = ceil($lines / $numposts);
-		$page = @$_GET['page'];
-		$loop_start = (@$page - 1) * @$numposts;
-		//10 - (5 * (2 + 1)) = -5 then last is 9
-		if(($page * $numposts) - count($articles) > 0)
-			$loop_end = count($articles) - 1;
-		elseif(($page * $numposts) - count($articles) <= 0)
-			if($loop_start == 0)
-				@$loop_end = @$numposts - 1;
-			elseif($numposts == 1)
-				$loop_end = $page - 1;
-			else
-				$loop_end = ($loop_start * $page) - 1;
-		//page 2: less than enough for that page (6, index 5)
-		//($page * $numposts) - count($articles) > 0...10-6
-		//page 2: enough to fill it (10, index 9), (12, index 9)
-		//($page * $numposts) - count($articles) <= 0...10-10...10-12
-		for($i = $loop_start; $i <= $loop_end; $i++){
-			echo @$articles[$i];
-		}
-		echo '<table style = "font-size: 12px" width = "888px"><td align = "center">';
-		if(($page <= 0) || ($page >= ceil(count($articles)/$numposts) + 1))
-			echo "<p><strong>No more results, go back.</strong></p>";
-			if($page <= 0){
-				echo '&raquo; Go to: ';
-				for($i = 1; $i <= @ceil(count($articles)/$numposts); $i++)
-					echo ' <a href="?page='.$i.'&max='. $numposts .'">'.$i.'</a> ';
-				echo '<a href = "?page='.($page + 1).'&max='.$numposts.'">Next </a>';
-			}
-			elseif($page >= ceil(count($articles)/$numposts) + 1){
-				echo '&raquo; Go to: ';
-				echo '<a href="?page='.($page - 1).'&max='.$numposts.'"> Previous</a>';
-				for($i = 1; $i <= @ceil(count($articles)/$numposts); $i++)
-					echo ' <a href="?page='.$i.'&max='. $numposts .'">'.$i.'</a> ';
-			}
-		else{
-			echo '&raquo; Go to: ';
-			echo '<a href="?page='.($page - 1).'&max='.$numposts.'"> Previous</a>';
-			for($i = 1; $i <= @ceil(count($articles)/$numposts); $i++)
-				echo ' <a href="?page='.$i.'&max='. $numposts .'">'.$i.'</a> ';
-			echo '<a href = "?page='.($page + 1).'&max='.$numposts.'">Next </a>';
-		}
-		echo '&laquo;</td></table>';
-		echo newslinks();
-	}else{
-		echo newslinks();
-		return '<table style = "font-size:12px" width = "888px"><tr><th>No news available for the '.$category.'.</th></tr></table>';
+	}
+	else
+	{
+		return array('<table style = "font-size:12px" width = "888px"><tr><th>No news available for the rit.</th></tr></table>');
 	}
 }
-/* ---------------- Without pagination ---------------
+/* pagination
+for($i = 0; $i < count($article); $i++){
+	//$article[i];
+	return ceil(count($article)/5)
+	if
+	//ceil, $_get['page'], die("{$_GET['page']}")
+}
+*/
 //reading the news for only rit with the full articles
-function readritt($rit = "rit.txt"){
+function readrit($rit = "rit.txt"){
 	if(file_exists($rit) && is_readable($rit)){
 		echo newslinks();
 		$ritdata = file($rit);
@@ -659,7 +677,7 @@ function readmiscellanous($miscellanous = "misc.txt"){
 		return '<table style = "font-size:12px" width = "888px"><tr><th>No news available for the miscellaneous.</th></tr></table>';
 	}
 }
-*/
+
 //archives index, for the older articles
 function archivessindex($archives = "archives.txt"){
 if(file_exists($archives) && is_readable($archives)){
@@ -685,10 +703,7 @@ echo '</table>';
 function updateEditorial(){
 $string = '<h2>Update the editorial:</h2>';
 $string .= '<form action = "'.$_SERVER["PHP_SELF"].'" method = "POST">';
-$string .= '<table style = "font-size:12px" width = "700"><th>Preview:</th>';
-$string .= '<tr><td>'.file_get_contents("editorial.txt").'</td></tr></table><br />';
-$string .= '<textarea id = "update_editorial" name = "update_editorial" rows="10" cols="80">';
-$string .= file_get_contents("editorial.txt").'</textarea>';
+$string .= '<textarea id = "update_editorial" name = "update_editorial" rows="10" cols="80"></textarea>';
 $string .= '<br /><br /><strong>File name: <input type = "input" name = "editorial_title" />';
 $string .= ' Password: <input type="password" name="password" size="15" /></strong><br /><br />';
 $string .= '<input type="reset" value="Reset Form" /><input type="submit" name="submit_editorial" value="Submit Changes" />';
@@ -858,7 +873,7 @@ function comments(){
 	$string .= '<tr><td>Your Email:</td><td><input type = "text" name = "email" size = "66" /></td></tr>';
 	$string .= '<tr><td colspan = "2" align = "center"><input type="reset" value="Reset Form" />';
 	$string .= '<input type="submit" name="submit_comment" value="Submit Comment" /></form></td></tr></table>';
-	echo $string;
+	return $string;
 }
 //validates/sanitizes all comments before appending to a file for the comments
 function checkcomments($comments = "comments.txt"){

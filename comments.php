@@ -4,7 +4,7 @@ include("LIB_template.php");
 include("template.css");
 $top = "";
 $top .= i_header($title = "Serenity: News", $styles = "", $keywords = "news, weather");
-$top .= i_body($font = "tahoma", $size = "12px", $text = "white", $bgcolor = "#27b1f1", $subcolor = "");
+$top .= i_body($font = "tahoma", $size = "12px", $text = "white", $bgcolor = "#996666", $subcolor = "");
 $weather = weather();
 $banner = banner($ban_file = "banners.txt");
 $banners = <<<END

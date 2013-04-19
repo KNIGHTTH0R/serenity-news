@@ -4,3 +4,5 @@ Tuesday, 11th of January 2011|10:07:02 PM|Test|This is a test comment.|admin@swe
 Tuesday, 11th of January 2011|10:07:43 PM|lol, ty.|Thank you for the comment!|admin@sweetsimplicity.com
 Tuesday, 11th of January 2011|11:49:33 PM|skdjs|ksjlskdj|kjsldksld
 Tuesday, 11th of January 2011|11:53:55 PM|dodgeball|Jenny, you should join the dodgeball team.|dodge@ball.com
+Thursday, 13th of January 2011|03:15:11 AM|Test|&#60;script&#62;alert(&#39;it works&#39;);&#60;/script&#62;|anon@example.com
+Tuesday, 25th of January 2011|11:37:27 AM|Hello|I hope you are doing okay right now, hun.|xoxo, Anon

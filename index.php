@@ -4,7 +4,7 @@ include("LIB_template.php");
 include("template.css");
 $top = "";
 $top .= i_header($title = "Serenity: News", $styles = "", $keywords = "news, weather");
-$top .= i_body($font = "tahoma", $size = "12px", $text = "white", $bgcolor = "#27b1f1", $subcolor = "");
+$top .= i_body($font = "tahoma", $size = "12px", $text = "white", $bgcolor = "#996666", $subcolor = "");
 $weather = weather();
 $banner = banner($ban_file = "banners.txt");
 $banners = <<<END
@@ -18,7 +18,7 @@ $top .= menu($menu = "nav.png");
 $top .= editorial($editorial = "editorial.txt", $picture = "pic.jpg");
 echo $top;
 $body = "";
-$body .= news($rit = "rit.txt", $nation = "nation.txt", $world = "world.txt", $business = "business.txt");
+$body .= news($rit = "rit", $rittxt = "rit.txt", $nation = "nation", $nationtxt = "nation.txt", $world = "world", $worldtxt = "world.txt", $business = "business", $businesstxt = "business.txt", $technology = "technology", $technologytxt = "technology.txt", $entertainment = "entertainment", $entertainmenttxt = "entertainment.txt", $sports = "sports", $sportstxt = "sports.txt", $miscellaneous = "miscellaneous", $misctxt = "misc.txt");
 echo $body;
 $bottom = "";
 $bottom .= ads($ad_file = "ads.txt");
