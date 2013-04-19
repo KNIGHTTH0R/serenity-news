@@ -39,6 +39,7 @@ $image = return_between($img, '<img src="', '"', EXCL);
 $des = return_between($info, '<div class="wx-data-part wx-first">', '="wx-weather-icon">', EXCL);
 $desc = return_between($des, 'alt="', '" class', EXCL);
 $temp = return_between($info, '<div class="wx-temperature"><span itemprop="temperature-fahrenheit">', '</span><span class="wx-degrees">&deg;<span class="wx-unit">F</span></span></div>', EXCL);
+
 $weather = <<<END
 <table>
 	<tr>
@@ -54,6 +55,7 @@ $weather = <<<END
 	</tr>
 </table>
 END;
+
 return $weather;
 }
 //getting site logo-banners and displaying randomly
