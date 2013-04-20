@@ -5,7 +5,7 @@ Content Management System (CMS) created from scratch; graphics and layouts were 
 
 Version 1
 ---------
-http://people.rit.edu/jxz6853/539/project1/index.php
+http://people.rit.edu/jxz6853/539/project/index.php
 
 Version 2
 ---------
